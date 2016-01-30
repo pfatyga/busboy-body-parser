@@ -13,8 +13,8 @@ module.exports = function (settings) {
             var busboy = new Busboy(_.extend({
                 headers: req.headers,
                 limits: {
-                    fileSize: Math.Infinity,
-                    fieldSize: Math.Infinity
+                    fileSize: Infinity,
+                    fieldSize: Infinity
                 }
             }, settings));
             busboy.on('field', function (key, value) {
