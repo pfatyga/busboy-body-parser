@@ -1,26 +1,22 @@
 var Busboy = require('busboy'),
-    bytes = require('bytes'),
+    _ = require('lodash'),
     concat = require('concat-stream'),
     debug = require('debug')('busboy-body-parser');
 
 module.exports = function (settings) {
 
     settings = settings || {};
-    settings.limit = settings.limit || Math.Infinity;
-
-    if (typeof settings.limit === 'string') {
-        settings.limit = bytes(settings.limit);
-    }
 
     return function multipartBodyParser(req, res, next) {
 
         if (req.is('multipart/form-data')) {
-            var busboy = new Busboy({
+            var busboy = new Busboy(_.extend({
                 headers: req.headers,
                 limits: {
-                    fileSize: settings.limit
+                    fileSize: Math.Infinity,
+                    fieldSize: Math.Infinity
                 }
-            });
+            }, settings));
             busboy.on('field', function (key, value) {
                 debug('Received field %s: %s', key, value);
                 req.body[key] = value;
