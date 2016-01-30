@@ -80,6 +80,7 @@ describe('multipart form parser', function () {
                 data: 'abc123',
                 name: 'test.jpg',
                 encoding: 'binary',
+                size: 6,
                 mimetype: 'image/jpeg',
                 truncated: false
             });
@@ -103,6 +104,7 @@ describe('multipart form parser', function () {
                 data: null,
                 name: 'test.jpg',
                 encoding: 'binary',
+                size: 6,
                 mimetype: 'image/jpeg',
                 truncated: true
             });
